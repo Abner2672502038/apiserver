@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<body>
+<h1>用户登录页面</h1>
+<h3>{{ base_url }}</h3>
+<ul>
+    {% for k,v in cookies.items() %}
+        <li>{{ k }}:{{ v }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
