@@ -1,8 +1,11 @@
 from mainapp import app
 from flask_script import Manager
 from  flask import render_template
-from mainapp.views import user
+from mainapp.views import user,bingdundun
 from models.user import db,User
+from models.role import Role
+from models.access import Access #使用Model创建表时需要声明表，否则创建不成功
+from models.user_role import user_role
 
 @app.route('/')
 def hello_world():
@@ -22,5 +25,6 @@ def delete_db():
 
 if __name__ == '__main__':
     app.register_blueprint(user.blue)
+    app.register_blueprint(bingdundun.blue)
     manager=Manager(app)
     manager.run()

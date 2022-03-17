@@ -7,7 +7,6 @@
 from flask import Blueprint
 from flask import request,render_template
 blue=Blueprint("userBlue",__name__,url_prefix="/user")
-
 @blue.route("/login",methods=['GET','POST'])
 def login():
     print("-------------------------------")
@@ -15,4 +14,5 @@ def login():
         "cookies":request.cookies,
         "base_url":request.base_url
     }
+    # ctrl+p弹出日志信息
     return render_template("user/login.html",**data)
