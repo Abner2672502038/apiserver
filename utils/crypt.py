@@ -5,6 +5,7 @@
 @Description : 加密
 """
 import hashlib
+import uuid
 
 
 def pwd(txt):
@@ -16,4 +17,5 @@ def pwd(txt):
     return md5.hexdigest()
 
 if __name__ == '__main__':
-    print(pwd("imu"))
+    print(uuid.uuid4().hex)
+    # print(pwd("imu"))

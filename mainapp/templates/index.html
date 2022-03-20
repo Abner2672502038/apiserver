@@ -4,7 +4,70 @@
     <meta charset="UTF-8">
     <title>主页</title>
 </head>
+<style>
+    .circly_img {
+        border: none;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        box-shadow: 5px 5px 5px lightgray;
+    }
+</style>
 <body>
 <h2>Welecom to Flask</h2>
+<p>
+    <img id="photo_img" class="circly_img" title="点击修改头像" src="{% if user.photo %}/static/{{ user.photo }} {% else %}/static/imgs/default_profile{% endif %}" onclick="selectImg()"/>
+</p>
+{#可以选择多个图片#}
+<input id="photofile"  type="file" style="display: none" onchange="uploadImg(this.files[0])">
+<h3><a href="{{ url_for("userBlue.modify") }}" style="text-decoration: none">个人中心</a></h3>
+<script>
+    function $(id) {
+        return document.getElementById(id);
+    }
+
+    function selectImg() {
+        if (confirm("是否要修改头像")) {
+            $("photofile").click();
+        }
+    }
+
+    function uploadImg(file) {
+        {#alert(file.name);#}
+        {#console.log(file);#}
+        {#lastModified: 1638069411996#}
+        {#lastModifiedDate: Sun Nov 28 2021 11:16:51 GMT+0800 (中国标准时间) {}#}
+        {#name: "狗.jpg"#}
+        {#size: 290339#}
+        {#type: "image/jpeg"#}
+        {#webkitRelativePath: ""#}
+        msg=""
+        if (file.type.startsWith("image/")) {
+            {#文件小于40k#}
+            if (file.size <= 2 * 1024 * 1024) {
+                url = "{{ url_for('userBlue.upload_profile') }}";
+                let req = new XMLHttpRequest();
+                req.open("post", url);
+                req.onload = function (ev) {
+                    if (req.status == 200 && req.readyState == 4) {
+                        respText = req.responseText;
+                        respJson = JSON.parse(respText);
+                        console.log(respText, respJson);
+                        $("photo_img").src = "/static/" + respJson.path;
+                    }
+                };
+                let dataform = new FormData();
+                dataform.append("userprofile", file);
+                {#发送请求#}
+                req.send(dataform);
+
+            } else {
+                alert("图片大小于2M");
+            }
+        } else {
+            alert("上传的文件必须为图片");
+        }
+    }
+</script>
 </body>
 </html>

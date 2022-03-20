@@ -4,6 +4,12 @@
 @Author : 薛定谔的余项
 @Description : 
 """
+import os
+
+PROJECT_DIR=os.path.dirname(os.path.abspath(__file__))
+Base_DIR=os.path.join(PROJECT_DIR,"mainapp")
+STATIC_DIR=os.path.join(Base_DIR,"static")
+USERIMGS_DIR=os.path.join(STATIC_DIR,"imgs/user")
 class Dev():
     ENV="development"
     DEBUG=True

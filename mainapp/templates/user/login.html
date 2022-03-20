@@ -6,12 +6,40 @@
 </head>
 <body>
 <h1>用户登录页面</h1>
-<h3>{{ base_url }}</h3>
-<ul>
-    {% for k,v in cookies.items() %}
-        <li>{{ k }}:{{ v }}</li>
-    {% endfor %}
-</ul>
+{#<h3>{{ base_url }}</h3>#}
+{#<ul>#}
+{#    {% for k,v in cookies.items() %}#}
+{#        <li>{{ k }}:{{ v }}</li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+{# 登录界面设计 #}
+<form action="/user/login" method="post" enctype="application/x-www-form-urlencoded">
+    <input name="phone" placeholder="手机号"><br>
+    <input name="pwd" type="password" placeholder="口令"><br>
+    <button>登录</button><a href="#">没有账号，去注册</a>
+</form>
+<div id="val_info" style="color: red">
+{{ msg }}
+</div>
+<script>
+    //根据id获取对象
+    function $(id) {
+        return document.getElementById(id)
+    }
+    //设置表单提交参数
+    document.forms[0].onsubmit = function (ev) {
+        {#console.log(this);  [object HTMLFormElement]#}
+        if (!/\d{11}/.test(this.phone.value)) {
+            $("val_info").innerHTML = "手机号不足11位";
+            return false;
+        }
+        if (!/\w{8,}/.test(this.pwd.value)) {
+            $("val_info").innerHTML = "口令至少包含数字和字母8位";
+            return false;
+        }
+        $("val_info").innerHTML = "";
 
+    };
+</script>
 </body>
 </html>

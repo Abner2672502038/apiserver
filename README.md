@@ -17,6 +17,14 @@ pip install flask flask-cors flask-blueprint flask-script pymysql flask-sqlalche
  * 接收开发需求
  * 任务code开发完成后、本地提交、上传服务器
  * 开发新任务、先更新别人代码
+ ## 二、文件上传
+ * 文件上传的两种方式：form标签和input的file类型的标签  
+ * Ajax的DataForm方式上传文件  
+ ### 2.1 表单标签上传
+ * form表单的enctype为"multipart/form-data",且method=post
+ 
+ ### 2.2 Ajax文件上传
+ 
  
 
  

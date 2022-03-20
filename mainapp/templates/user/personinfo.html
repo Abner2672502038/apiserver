@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>{{ user.nick_name }}person information</title>
 </head>
 <body>
-$END$
+<h5>修改{{ user.name }}的个人信息</h5>
+<img src="{% if user.photo  %}/static/{{ user.photo }}{% else %}/static/imgs/default_profile.jpg{% endif %}" width="100px" height="100px">
+{#不写action表示提交到同一地址#}
+<form enctype="multipart/form-data" method="post">
+    <input name="user_profile" type="file">
+    <button>上传文件</button>
+</form>
+<div style="color: red">
+    {{ msg }}
+</div>
 </body>
 </html>

@@ -11,6 +11,7 @@ from models.role import Role
 from utils.crypt import pwd
 from models import db
 
+
 class TestUser(TestCase):
 
     # 方法名以test_开头
@@ -44,6 +45,22 @@ class TestUser(TestCase):
         # 将角色对象添加给用户
         user.roles.append(admin_role)
         db.session.commit()
+
+    def test1(self):
+        app.app_context().push()
+        # login_user=db.session.query(User).filter(db.and_(User.name.__eq__("18345466"),User.auth_key.__eq__("3456")))
+        print("---------------------")
+        # print(login_user)
+
+        db.session.add(User(name='18000676189',auth_key=pwd("12345iop"),nick_name="野猪佩奇"))
+        db.session.commit()
+        # u=User.query.get(2)
+        # u.photo="imgs/user/flypig.jpeg"
+        # db.session.commit()
+
+
+
+
 
 
 
