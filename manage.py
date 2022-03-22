@@ -1,17 +1,22 @@
 from mainapp import app
 from flask_script import Manager
 from  flask import render_template,request,redirect,url_for
-from mainapp.views import user,bingdundun
+from mainapp.views import user, bingdundun, logger
 from models.user import db,User
 from models.role import Role
 from models.access import Access #使用Model创建表时需要声明表，否则创建不成功
 from models.user_role import user_role
 from utils import cache
+from  flask import current_app
 
 
 @app.before_request
 def check_login():
-    if request.path!='/user/login':
+    # app.logger.info(request.path+"被访问")
+    # app.logger.error(request.path+"发生错误")
+    print("===============================")
+    if request.path not in ['/user/login','/log/upload']:
+        print("------------------------------------")
         # 验证token有效
         token=request.cookies.get("token")
         if not token:
@@ -24,7 +29,12 @@ def check_login():
 
 @app.route('/')
 def hello_world():
+    current_app.logger.warning("current_app info信息")
+    current_app.logger.error("curent_app---error 信息")
+    current_app.logger.critical("curent_app----critical信息")
+
     token=request.cookies.get("token")
+    print(token)
     user=User.query.get(int(cache.get_token_userId(token)))
 
 
@@ -43,7 +53,12 @@ def delete_db():
 
 
 if __name__ == '__main__':
+    # 注册蓝图
     app.register_blueprint(user.blue)
     app.register_blueprint(bingdundun.blue)
-    manager=Manager(app)
-    manager.run()
+    app.register_blueprint(logger.blue)
+    app.run(threaded=True)
+    #
+    # manager:Manager=Manager(app)
+    #
+    # manager.run()

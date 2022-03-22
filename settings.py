@@ -13,6 +13,7 @@ USERIMGS_DIR=os.path.join(STATIC_DIR,"imgs/user")
 class Dev():
     ENV="development"
     DEBUG=True
+    MULTITHREAD=True
     # sqlalchemy的配置
     SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:Abner@127.0.0.1:3306/edu'
     SQLALCHEMY_TRACK_MODIFICATIONS=True

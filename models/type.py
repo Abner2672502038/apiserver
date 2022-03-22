@@ -4,6 +4,8 @@
 @Author : 薛定谔的余项
 @Description : 元类实现ORM
 """
+from flask import logging
+from  flask import g
 # python中的元类
 """
  1.type
@@ -61,6 +63,7 @@ class Model(metaclass=BaseModelMeta):
         colums=[ "%s %s"% (key,'varchar(%s)'%filed.length if isinstance(filed,CharFiled) else "Integer") for key ,filed in self.fileds.items()]
         sql=sql%(table_name,','.join(colums))
         print(sql)
+
     def save(cls):
         pass
 
@@ -88,4 +91,6 @@ if __name__ == '__main__':
     # print(user.hello("hello"))
     u=Person()
     u.create()
+
+
 

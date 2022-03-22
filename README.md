@@ -24,6 +24,15 @@ pip install flask flask-cors flask-blueprint flask-script pymysql flask-sqlalche
  * form表单的enctype为"multipart/form-data",且method=post
  
  ### 2.2 Ajax文件上传
+ ## 三、Flask相关的知识点
+ 1.flask中的日志  
+ * 日志等级：logging.NOSET-0、DEBUG-10、INFO-20、WARNING-30、ERROR-40、CRITICAL-50   
+ * 可以删除flask默认的日志处理器，增加自己的处理Handler  
+ * 常用的处理器Handler：  
+ logging.StreamHandler/FilerHandler     
+ logging.handlers.HTPPHandler/SMTPHandler  
+ 
+ 
  
  
 
